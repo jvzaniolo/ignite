@@ -1,14 +1,12 @@
-export type RepositoryProps = {
-  name: string
-  description: string
-  html_url: string
+export interface RepositoryProps {
+  repository: {
+    name: string
+    description: string
+    html_url: string
+  }
 }
 
-type RepositoryTypes = {
-  repository: RepositoryProps
-}
-
-export default function Repository({ repository }: RepositoryTypes) {
+export default function Repository({ repository }: RepositoryProps) {
   return (
     <li>
       <strong>{repository.name}</strong>
