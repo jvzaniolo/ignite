@@ -13,7 +13,7 @@ export const Content = styled.div`
   padding: 2rem 1rem 10rem;
   justify-content: space-between;
 
-  button {
+  > button {
     border: 0;
     color: white;
     font-size: 1rem;
