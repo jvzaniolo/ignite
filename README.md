@@ -1,6 +1,6 @@
 # Ignite
 
-Repo with projects develop during the Ignite Bootcamp.
+Repo with projects developed during the Ignite Bootcamp.
 
 ## Repositories
 
