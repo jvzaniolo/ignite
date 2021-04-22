@@ -4,9 +4,9 @@ Repo with projects developed during the Ignite Bootcamp.
 
 ## Repositories
 
-- [Github Explorer](./01-github-explorer)
-- [DT Money](./02-dtmoney)
-- [ig.news](./03-ig-news)
+- [Github Explorer](./react/01-github-explorer)
+- [DT Money](./react/02-dtmoney)
+- [ig.news](./react/03-ig-news)
 
 ---
 
