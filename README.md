@@ -6,6 +6,7 @@ Repo with projects developed during the Ignite Bootcamp.
 
 - [Github Explorer](./01-github-explorer)
 - [DT Money](./02-dtmoney)
+- [ig.news](./03-ig-news)
 
 ---
 
