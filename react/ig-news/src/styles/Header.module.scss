@@ -1,0 +1,57 @@
+.container {
+  height: 5rem;
+  border-bottom: 1px solid var(--gray-800);
+}
+
+.content {
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  max-width: 1120px;
+
+  display: flex;
+  align-items: center;
+
+  > nav {
+    height: 100%;
+    margin-left: 5rem;
+
+    > a {
+      height: 100%;
+      padding: 0 0.5rem;
+      line-height: 5rem;
+      position: relative;
+      display: inline-block;
+      color: var(--gray-300);
+
+      transition: color 0.2s;
+
+      &:hover {
+        color: var(--white);
+      }
+
+      &.active {
+        color: var(--white);
+        font-weight: bold;
+      }
+      &.active::after {
+        content: '';
+        height: 3px;
+        border-radius: 0.25rem 0.25rem 0 0;
+        width: 100%;
+        position: absolute;
+        bottom: 1px;
+        left: 0;
+        background: var(--primary);
+      }
+
+      & + a {
+        margin-left: 2rem;
+      }
+    }
+  }
+
+  > button {
+    margin-left: auto;
+  }
+}
