@@ -15,9 +15,36 @@
 
   transition: filter 0.2s;
 
-  > svg {
+  svg {
     width: 20px;
     height: 20px;
+  }
+
+  > button {
+    border: 0;
+    display: flex;
+    color: #737380;
+    position: relative;
+    border-radius: 9999px;
+    background: transparent;
+
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--white);
+
+      &::after {
+        content: '';
+        padding: 1rem;
+        position: absolute;
+        filter: brightness(0.6);
+        background: var(--signin-button);
+        z-index: -1;
+        top: -26%;
+        right: -30%;
+        border-radius: 9999px;
+      }
+    }
   }
 
   &:hover {
