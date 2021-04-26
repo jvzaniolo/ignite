@@ -1,8 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import { Readable } from 'stream';
 import Stripe from 'stripe';
+
 import { stripe } from '../../services/stripe';
-import { saveSubscription } from './_lib/manageSubscription';
+import { manageSubscription } from './_lib/manageSubscription';
+
+const EventType = new Set([
+  'checkout.session.completed',
+  'customer.subscription.updated',
+  'customer.subscription.deleted',
+]);
 
 async function buffer(readable: Readable) {
   const chunks = [];
@@ -13,14 +21,6 @@ async function buffer(readable: Readable) {
 
   return Buffer.concat(chunks);
 }
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-const relevantEvents = new Set(['checkout.session.completed']);
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
@@ -39,18 +39,33 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
 
-    const { type } = event;
+    const type = event.type;
 
-    if (relevantEvents.has(type)) {
+    if (EventType.has(type)) {
       try {
         switch (type) {
+          case 'customer.subscription.updated': {
+            break;
+          }
+          case 'customer.subscription.deleted': {
+            const subscription = event.data.object as Stripe.Subscription;
+
+            await manageSubscription(
+              subscription.id,
+              subscription.customer.toString(),
+              false
+            );
+
+            break;
+          }
           case 'checkout.session.completed': {
             const checkoutSession = event.data
               .object as Stripe.Checkout.Session;
 
-            await saveSubscription(
+            await manageSubscription(
               checkoutSession.subscription.toString(),
-              checkoutSession.customer.toString()
+              checkoutSession.customer.toString(),
+              true
             );
 
             break;
@@ -68,4 +83,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.setHeader('Allow', 'POST');
     res.status(405).end('Method not allowed');
   }
+};
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
 };
