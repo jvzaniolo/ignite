@@ -1,6 +1,6 @@
-import { signIn, signOut, useSession } from 'next-auth/client';
-import { FaGithub } from 'react-icons/fa';
 import { FiX } from 'react-icons/fi';
+import { FaGithub } from 'react-icons/fa';
+import { signIn, signOut, useSession } from 'next-auth/client';
 
 import styles from '../styles/SignInButton.module.scss';
 
