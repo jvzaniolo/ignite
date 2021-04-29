@@ -1,6 +1,6 @@
 import { Flex, Button, Stack } from '@chakra-ui/react';
 
-import Input from '../components/form/Input';
+import Input from '../components/Input';
 
 export default function SignIn() {
   return (
@@ -20,11 +20,8 @@ export default function SignIn() {
             name="email"
             type="email"
             bgColor="gray.900"
-            focusBorderColor="pink.500"
+            focusBorderColor="cyan.500"
             variant="filled"
-            _hover={{
-              bgColor: 'gray.900',
-            }}
             size="lg"
           />
 
@@ -33,16 +30,13 @@ export default function SignIn() {
             name="password"
             type="password"
             bgColor="gray.900"
-            focusBorderColor="pink.500"
+            focusBorderColor="cyan.500"
             variant="filled"
-            _hover={{
-              bgColor: 'gray.900',
-            }}
             size="lg"
           />
         </Stack>
 
-        <Button type="submit" mt="6" size="lg" colorScheme="pink">
+        <Button type="submit" mt="6" size="lg" colorScheme="cyan">
           Entrar
         </Button>
       </Flex>
