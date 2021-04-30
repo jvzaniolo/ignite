@@ -12,7 +12,10 @@ import {
   Thead,
   Tr,
   Text,
+  useBreakpointValue,
+  Icon,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import { RiAddLine, RiPencilLine } from 'react-icons/ri';
 
 import Header from '../../components/Header';
@@ -20,6 +23,11 @@ import Drawer from '../../components/Drawer';
 import Pagination from '../../components/Pagination';
 
 export default function Users() {
+  const isLargeBreakpoint = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
+
   return (
     <Box>
       <Header />
@@ -33,33 +41,37 @@ export default function Users() {
               Usuários
             </Heading>
 
-            <Button
-              as="a"
-              size="sm"
-              fontSize="md"
-              cursor="pointer"
-              colorScheme="cyan"
-              leftIcon={<RiAddLine />}
-            >
-              Criar novo
-            </Button>
+            <Link href="/users/create" passHref>
+              <Button
+                as="a"
+                size="sm"
+                fontSize="md"
+                cursor="pointer"
+                colorScheme="cyan"
+              >
+                <Icon as={RiAddLine} mr={isLargeBreakpoint ? '2' : 0} />
+                {isLargeBreakpoint && 'Criar novo'}
+              </Button>
+            </Link>
           </Flex>
 
           <Table colorScheme="gray">
             <Thead>
               <Tr>
-                <Th px="6" color="gray.300" w="8">
+                <Th px={['4', '4', '6']} color="gray.300" w="8">
                   <Checkbox colorScheme="cyan" />
                 </Th>
 
                 <Th>Usuário</Th>
-                <Th>Data de cadastro</Th>
-                <Th w="8" />
+                {isLargeBreakpoint && <Th>Data de cadastro</Th>}
+                <Th w="8" textAlign="right">
+                  {!isLargeBreakpoint && 'Editar'}
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
               <Tr>
-                <Td px="6">
+                <Td px={['4', '4', '6']}>
                   <Checkbox colorScheme="cyan" />
                 </Td>
 
@@ -71,7 +83,7 @@ export default function Users() {
                     </Text>
                   </Box>
                 </Td>
-                <Td>04 de Abril, 2021</Td>
+                {isLargeBreakpoint && <Td>04 de Abril, 2021</Td>}
                 <Td textAlign="right">
                   <Button
                     as="a"
@@ -80,15 +92,15 @@ export default function Users() {
                     cursor="pointer"
                     variant="ghost"
                     colorScheme="cyan"
-                    leftIcon={<RiPencilLine />}
                   >
-                    Editar
+                    <Icon as={RiPencilLine} mr={isLargeBreakpoint ? '2' : 0} />
+                    {isLargeBreakpoint && 'Editar'}
                   </Button>
                 </Td>
               </Tr>
 
               <Tr>
-                <Td px="6">
+                <Td px={['4', '4', '6']}>
                   <Checkbox colorScheme="cyan" />
                 </Td>
 
@@ -100,7 +112,7 @@ export default function Users() {
                     </Text>
                   </Box>
                 </Td>
-                <Td>04 de Abril, 2021</Td>
+                {isLargeBreakpoint && <Td>04 de Abril, 2021</Td>}
                 <Td textAlign="right">
                   <Button
                     as="a"
@@ -109,9 +121,9 @@ export default function Users() {
                     cursor="pointer"
                     variant="ghost"
                     colorScheme="cyan"
-                    leftIcon={<RiPencilLine />}
                   >
-                    Editar
+                    <Icon as={RiPencilLine} mr={isLargeBreakpoint ? '2' : 0} />
+                    {isLargeBreakpoint && 'Editar'}
                   </Button>
                 </Td>
               </Tr>

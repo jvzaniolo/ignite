@@ -1,31 +1,45 @@
 import React from 'react';
-import { Box, Stack } from '@chakra-ui/react';
 import {
-  RiContactsLine,
-  RiDashboardLine,
-  RiGitMergeLine,
-} from 'react-icons/ri';
+  Box,
+  Drawer as ChakraDrawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  useBreakpointValue,
+} from '@chakra-ui/react';
 
-import Link from './Link';
-import Category from './Category';
+import Content from './Content';
+import { useDrawer } from '../../contexts/DrawerContext';
 
 export default function Drawer() {
+  const { isOpen, onClose } = useDrawer();
+  const floating = useBreakpointValue({
+    base: true,
+    lg: false,
+  });
+
+  if (floating) {
+    return (
+      <ChakraDrawer isOpen={isOpen} placement="left" onClose={onClose}>
+        <DrawerOverlay>
+          <DrawerContent p="4">
+            <DrawerCloseButton mt="6" />
+            <DrawerHeader>Navegação</DrawerHeader>
+
+            <DrawerBody>
+              <Content />
+            </DrawerBody>
+          </DrawerContent>
+        </DrawerOverlay>
+      </ChakraDrawer>
+    );
+  }
+
   return (
     <Box as="aside" w="64" mr="8">
-      <Stack spacing="12" align="flex-start">
-        <Category title="GERAL">
-          <>
-            <Link icon={RiDashboardLine} title="Dashboard" />
-            <Link icon={RiContactsLine} title="Usuários" />
-          </>
-        </Category>
-        <Category title="AUTOMAÇÃO">
-          <>
-            <Link icon={RiGitMergeLine} title="Formulários" />
-            <Link icon={RiContactsLine} title="Automação" />
-          </>
-        </Category>
-      </Stack>
+      <Content />
     </Box>
   );
 }

@@ -1,11 +1,25 @@
 import React from 'react';
-import { Flex, Text } from '@chakra-ui/react';
+import {
+  Flex,
+  Icon,
+  IconButton,
+  Text,
+  useBreakpointValue,
+} from '@chakra-ui/react';
 
 import Search from './Search';
 import Profile from './Profile';
 import Notification from './Notification';
+import { useDrawer } from '../../contexts/DrawerContext';
+import { RiMenuLine } from 'react-icons/ri';
 
 export default function Header() {
+  const { onOpen } = useDrawer();
+  const isLargeBreakpoint = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
+
   return (
     <Flex
       as="header"
@@ -18,19 +32,34 @@ export default function Header() {
       align="center"
       justifyContent="flex-start"
     >
-      <Text fontSize="3xl" fontWeight="bold" letterSpacing="tight" w="64">
+      {!isLargeBreakpoint && (
+        <IconButton
+          icon={<Icon as={RiMenuLine} />}
+          fontSize="24"
+          variant="unstyled"
+          onClick={onOpen}
+          aria-label="Open Drawer"
+          mr="2"
+        ></IconButton>
+      )}
+      <Text
+        w="64"
+        fontWeight="bold"
+        letterSpacing="tight"
+        fontSize={['2xl', '3xl']}
+      >
         dashgo
         <Text as="span" ml="1" color="cyan.500">
           .
         </Text>
       </Text>
 
-      <Search />
+      {isLargeBreakpoint && <Search />}
 
       <Flex align="center" ml="auto">
         <Notification />
 
-        <Profile />
+        <Profile showUserInfo={isLargeBreakpoint} />
       </Flex>
     </Flex>
   );
