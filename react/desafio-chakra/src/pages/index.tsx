@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 
 import Banner from '../components/Banner';
+import Link from 'next/link';
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -90,21 +91,23 @@ export default function Home() {
           }}
         >
           <SwiperSlide>
-            <Center h="100%" flexDir="column">
-              <Image
-                h="100%"
-                w="100%"
-                src="/images/europe.png"
-                alt="Europa"
-                pos="absolute"
-                objectFit="cover"
-                zIndex="hide"
-              />
-              <Heading color="white">Europa</Heading>
-              <Text color="whiteAlpha.800" fontWeight="bold">
-                O continente mais antigo.
-              </Text>
-            </Center>
+            <Link href="/continent/europe">
+              <Center h="100%" flexDir="column" cursor="pointer">
+                <Image
+                  h="100%"
+                  w="100%"
+                  src="/images/europe.png"
+                  alt="Europa"
+                  pos="absolute"
+                  objectFit="cover"
+                  zIndex="hide"
+                />
+                <Heading color="white">Europa</Heading>
+                <Text color="whiteAlpha.800" fontWeight="bold">
+                  O continente mais antigo.
+                </Text>
+              </Center>
+            </Link>
           </SwiperSlide>
           <SwiperSlide>
             <Center h="100%" flexDir="column">
