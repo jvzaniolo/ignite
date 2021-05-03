@@ -1,4 +1,6 @@
 import React from 'react';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Flex, Button, Stack } from '@chakra-ui/react';
 
@@ -9,8 +11,15 @@ type SignInData = {
   password: string;
 };
 
+const signInSchema = yup.object().shape({
+  email: yup.string().required('E-mail obrigatório').email('Email inválido'),
+  password: yup.string().required('Senha obrigatória'),
+});
+
 export default function SignIn() {
-  const { register, handleSubmit, formState } = useForm();
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(signInSchema),
+  });
 
   const handleSignIn: SubmitHandler<SignInData> = async data => {
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -34,10 +43,11 @@ export default function SignIn() {
             label="E-mail"
             name="email"
             type="email"
+            error={formState.errors.email}
+            size="lg"
+            variant="filled"
             bgColor="gray.900"
             focusBorderColor="cyan.500"
-            variant="filled"
-            size="lg"
             {...register('email')}
           />
 
@@ -45,6 +55,7 @@ export default function SignIn() {
             label="Senha"
             name="password"
             type="password"
+            error={formState.errors.password}
             bgColor="gray.900"
             focusBorderColor="cyan.500"
             variant="filled"
