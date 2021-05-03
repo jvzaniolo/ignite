@@ -8,7 +8,7 @@ export default function Header() {
   const { asPath } = useRouter();
 
   return (
-    <Flex w="100vw" align="center" h={50} px="2">
+    <Flex align="center" p="4">
       {asPath !== '/' && (
         <Link href="/" passHref>
           <IconButton
@@ -21,7 +21,12 @@ export default function Header() {
           />
         </Link>
       )}
-      <Image src="/images/logo.svg" alt="World Trip" h="6" mx="auto" />
+      <Image
+        src="/images/logo.svg"
+        alt="World Trip"
+        h={['6', '10']}
+        mx="auto"
+      />
     </Flex>
   );
 }
