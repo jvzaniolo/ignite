@@ -1,9 +1,9 @@
-import React, { ReactElement } from 'react';
-import { Box, Text, Stack } from '@chakra-ui/react';
+import React, { ReactElement } from 'react'
+import { Box, Text, Stack } from '@chakra-ui/react'
 
 interface CategoryProps {
-  title: string;
-  children: ReactElement;
+  title: string
+  children: ReactElement
 }
 
 export default function Category({ title, children }: CategoryProps) {
@@ -16,5 +16,5 @@ export default function Category({ title, children }: CategoryProps) {
         {children}
       </Stack>
     </Box>
-  );
+  )
 }

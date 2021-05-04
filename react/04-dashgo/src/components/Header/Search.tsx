@@ -1,6 +1,6 @@
-import React from 'react';
-import { RiSearchLine } from 'react-icons/ri';
-import { InputGroup, Input, InputRightElement } from '@chakra-ui/react';
+import React from 'react'
+import { RiSearchLine } from 'react-icons/ri'
+import { InputGroup, Input, InputRightElement } from '@chakra-ui/react'
 
 export default function Search() {
   return (
@@ -23,5 +23,5 @@ export default function Search() {
         children={<RiSearchLine />}
       />
     </InputGroup>
-  );
+  )
 }

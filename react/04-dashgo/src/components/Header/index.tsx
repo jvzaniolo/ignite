@@ -1,24 +1,24 @@
-import React from 'react';
+import React from 'react'
 import {
   Flex,
   Icon,
   IconButton,
   Text,
   useBreakpointValue,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 
-import Search from './Search';
-import Profile from './Profile';
-import Notification from './Notification';
-import { useDrawer } from '../../contexts/DrawerContext';
-import { RiMenuLine } from 'react-icons/ri';
+import Search from './Search'
+import Profile from './Profile'
+import Notification from './Notification'
+import { useDrawer } from '../../contexts/DrawerContext'
+import { RiMenuLine } from 'react-icons/ri'
 
 export default function Header() {
-  const { onOpen } = useDrawer();
+  const { onOpen } = useDrawer()
   const isLargeBreakpoint = useBreakpointValue({
     base: false,
     lg: true,
-  });
+  })
 
   return (
     <Flex
@@ -62,5 +62,5 @@ export default function Header() {
         <Profile showUserInfo={isLargeBreakpoint} />
       </Flex>
     </Flex>
-  );
+  )
 }

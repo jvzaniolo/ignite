@@ -1,7 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
-import { useQuery } from 'react-query';
-import { RiAddLine, RiPencilLine } from 'react-icons/ri';
+import React, { useState } from 'react'
+import Link from 'next/link'
+import { RiAddLine, RiPencilLine } from 'react-icons/ri'
 import {
   Box,
   Button,
@@ -19,41 +18,20 @@ import {
   Icon,
   Center,
   Spinner,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 
-import Header from '../../components/Header';
-import Drawer from '../../components/Drawer';
-import Pagination from '../../components/Pagination';
-
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  createdAt: Date;
-};
+import Header from '../../components/Header'
+import Drawer from '../../components/Drawer'
+import Pagination from '../../components/Pagination'
+import useUserQuery from '../../services/hooks/useUserQuery'
 
 export default function Users() {
-  const { data, isLoading, error } = useQuery<User[]>(
-    'users',
-    async () => {
-      const response = await fetch('http://localhost:3000/api/users');
-      const data = await response.json();
-
-      return data.users.map((user: User) => ({
-        ...user,
-        createdAt: new Date(user.createdAt).toLocaleDateString('pt-BR', {
-          day: '2-digit',
-          month: 'long',
-          year: 'numeric',
-        }),
-      }));
-    },
-    { staleTime: Infinity }
-  );
+  const [page, setPage] = useState(1)
+  const { data, isLoading, isFetching, error } = useUserQuery(page)
   const isLargeBreakpoint = useBreakpointValue({
     base: false,
     lg: true,
-  });
+  })
 
   return (
     <Box>
@@ -66,6 +44,9 @@ export default function Users() {
           <Flex mb="8" justify="space-between" align="center">
             <Heading size="lg" fontWeight="normal">
               Usuários
+              {!isLoading && isFetching && (
+                <Spinner size="sm" color="gray.500" ml="4" />
+              )}
             </Heading>
 
             <Link href="/users/create" passHref>
@@ -107,7 +88,7 @@ export default function Users() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data.map(user => (
+                  {data.users.map(user => (
                     <Tr key={user.id}>
                       <Td px={['4', '4', '6']}>
                         <Checkbox colorScheme="cyan" />
@@ -143,11 +124,15 @@ export default function Users() {
                 </Tbody>
               </Table>
 
-              <Pagination />
+              <Pagination
+                page={page}
+                total={data.total}
+                onPageChange={setPage}
+              />
             </>
           )}
         </Box>
       </Flex>
     </Box>
-  );
+  )
 }

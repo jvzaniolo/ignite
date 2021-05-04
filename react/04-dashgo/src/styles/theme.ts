@@ -1,4 +1,4 @@
-import { extendTheme, theme } from '@chakra-ui/react';
+import { extendTheme, theme } from '@chakra-ui/react'
 
 export default extendTheme({
   fonts: {
@@ -15,4 +15,4 @@ export default extendTheme({
   config: {
     initialColorMode: 'dark',
   },
-});
+})

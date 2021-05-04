@@ -1,8 +1,8 @@
-import React from 'react';
-import Link from 'next/link';
-import * as yup from 'yup';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import React from 'react'
+import Link from 'next/link'
+import * as yup from 'yup'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import {
   Box,
   Button,
@@ -12,18 +12,18 @@ import {
   Heading,
   SimpleGrid,
   VStack,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 
-import Header from '../../components/Header';
-import Drawer from '../../components/Drawer';
-import Input from '../../components/Input';
+import Header from '../../components/Header'
+import Drawer from '../../components/Drawer'
+import Input from '../../components/Input'
 
 type CreateUserData = {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+  name: string
+  email: string
+  password: string
+  confirmPassword: string
+}
 
 const createUserSchema = yup.object().shape({
   name: yup.string().required('Nome obrigatório'),
@@ -35,7 +35,7 @@ const createUserSchema = yup.object().shape({
   passwordConfirmation: yup
     .string()
     .oneOf([null, yup.ref('password')], 'Senhas não coincidem'),
-});
+})
 
 export default function CreateUser() {
   const {
@@ -44,13 +44,13 @@ export default function CreateUser() {
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(createUserSchema),
-  });
+  })
 
   const handleCreateUser: SubmitHandler<CreateUserData> = async data => {
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 2000))
 
-    console.log(data);
-  };
+    console.log(data)
+  }
 
   return (
     <Box>
@@ -120,5 +120,5 @@ export default function CreateUser() {
         </Box>
       </Flex>
     </Box>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-import dynamic from 'next/dynamic';
-import { Box, Flex, SimpleGrid, Text, theme } from '@chakra-ui/react';
+import dynamic from 'next/dynamic'
+import { Box, Flex, SimpleGrid, Text, theme } from '@chakra-ui/react'
 
-import Header from '../components/Header';
-import Drawer from '../components/Drawer';
+import Header from '../components/Header'
+import Drawer from '../components/Drawer'
 
-const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 const options = {
   chart: {
@@ -52,14 +52,14 @@ const options = {
       opacityTo: 0.3,
     },
   },
-};
+}
 
 const series = [
   {
     name: 'series1',
     data: [31, 120, 10, 28, 51, 18, 109],
   },
-];
+]
 
 export default function Dashboard() {
   return (
@@ -86,5 +86,5 @@ export default function Dashboard() {
         </SimpleGrid>
       </Flex>
     </Flex>
-  );
+  )
 }

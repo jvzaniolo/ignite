@@ -1,5 +1,5 @@
-import React from 'react';
-import { Flex, Box, Avatar, Text } from '@chakra-ui/react';
+import React from 'react'
+import { Flex, Box, Avatar, Text } from '@chakra-ui/react'
 
 export default function Profile({ showUserInfo = true }) {
   return (
@@ -19,5 +19,5 @@ export default function Profile({ showUserInfo = true }) {
         src="https://github.com/jvzaniolo.png"
       />
     </Flex>
-  );
+  )
 }

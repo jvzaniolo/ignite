@@ -1,16 +1,16 @@
-import ActiveLink from '../ActiveLink';
-import React, { ElementType } from 'react';
+import ActiveLink from '../ActiveLink'
+import React, { ElementType } from 'react'
 import {
   Text,
   Icon,
   Link as ChakraLink,
   LinkProps as ChakraLinkProps,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 
 interface LinkProps extends ChakraLinkProps {
-  href: string;
-  title: string;
-  icon: ElementType;
+  href: string
+  title: string
+  icon: ElementType
 }
 
 export default function Link({ title, icon, href, ...props }: LinkProps) {
@@ -23,5 +23,5 @@ export default function Link({ title, icon, href, ...props }: LinkProps) {
         </Text>
       </ChakraLink>
     </ActiveLink>
-  );
+  )
 }

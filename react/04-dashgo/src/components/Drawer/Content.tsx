@@ -1,13 +1,9 @@
-import React from 'react';
-import { Stack } from '@chakra-ui/react';
-import {
-  RiDashboardLine,
-  RiContactsLine,
-  RiGitMergeLine,
-} from 'react-icons/ri';
+import React from 'react'
+import { Stack } from '@chakra-ui/react'
+import { RiDashboardLine, RiContactsLine, RiGitMergeLine } from 'react-icons/ri'
 
-import Link from './Link';
-import Category from './Category';
+import Link from './Link'
+import Category from './Category'
 
 export default function Content() {
   return (
@@ -25,5 +21,5 @@ export default function Content() {
         </>
       </Category>
     </Stack>
-  );
+  )
 }

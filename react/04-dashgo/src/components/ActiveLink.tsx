@@ -1,21 +1,21 @@
-import React, { cloneElement, ReactElement } from 'react';
-import Link, { LinkProps } from 'next/link';
-import { useRouter } from 'next/router';
+import React, { cloneElement, ReactElement } from 'react'
+import Link, { LinkProps } from 'next/link'
+import { useRouter } from 'next/router'
 
 interface ActiveLinkProps extends LinkProps {
-  children: ReactElement;
+  children: ReactElement
 }
 
 export default function ActiveLink({ children, ...props }: ActiveLinkProps) {
-  let isActive = false;
-  const { asPath } = useRouter();
+  let isActive = false
+  const { asPath } = useRouter()
 
   if (
     asPath === props.as ||
     asPath.includes === props.href ||
     asPath.includes(String(props.href))
   ) {
-    isActive = true;
+    isActive = true
   }
 
   return (
@@ -24,5 +24,5 @@ export default function ActiveLink({ children, ...props }: ActiveLinkProps) {
         color: isActive ? 'cyan.500' : 'gray.200',
       })}
     </Link>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Box,
   Drawer as ChakraDrawer,
@@ -8,17 +8,17 @@ import {
   DrawerHeader,
   DrawerOverlay,
   useBreakpointValue,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 
-import Content from './Content';
-import { useDrawer } from '../../contexts/DrawerContext';
+import Content from './Content'
+import { useDrawer } from '../../contexts/DrawerContext'
 
 export default function Drawer() {
-  const { isOpen, onClose } = useDrawer();
+  const { isOpen, onClose } = useDrawer()
   const floating = useBreakpointValue({
     base: true,
     lg: false,
-  });
+  })
 
   if (floating) {
     return (
@@ -34,12 +34,12 @@ export default function Drawer() {
           </DrawerContent>
         </DrawerOverlay>
       </ChakraDrawer>
-    );
+    )
   }
 
   return (
     <Box as="aside" w="64" mr="8">
       <Content />
     </Box>
-  );
+  )
 }
