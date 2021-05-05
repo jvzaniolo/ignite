@@ -39,6 +39,6 @@ export const getUsers = async (page: number): Promise<GetUsersProps> => {
 }
 
 const useUserQuery = (page: number) =>
-  useQuery(['users', page], () => getUsers(page), { staleTime: 1000 * 5 })
+  useQuery(['users', page], () => getUsers(page), { staleTime: 1000 * 60 * 10 })
 
 export default useUserQuery

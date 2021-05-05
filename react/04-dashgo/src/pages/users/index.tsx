@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import { RiAddLine, RiPencilLine } from 'react-icons/ri'
 import {
   Box,
@@ -49,7 +49,7 @@ export default function Users() {
               )}
             </Heading>
 
-            <Link href="/users/create" passHref>
+            <NextLink href="/users/create" passHref>
               <Button
                 as="a"
                 size="sm"
@@ -60,7 +60,7 @@ export default function Users() {
                 <Icon as={RiAddLine} mr={isLargeBreakpoint ? '2' : 0} />
                 {isLargeBreakpoint && 'Criar novo'}
               </Button>
-            </Link>
+            </NextLink>
           </Flex>
 
           {isLoading ? (
@@ -96,7 +96,9 @@ export default function Users() {
 
                       <Td>
                         <Box>
-                          <Text fontWeight="bold">{user.name}</Text>
+                          <Text as="a" fontWeight="bold">
+                            {user.name}
+                          </Text>
                           <Text fontSize="sm" color="gray.300">
                             {user.email}
                           </Text>

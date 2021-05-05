@@ -46,7 +46,7 @@ export default function makeServer({ environment = 'development' } = {}) {
 
         return new Response(200, { 'X-Total-Users': String(total) }, { users })
       })
-
+      this.get('/users/:id')
       this.post('/users')
 
       this.namespace = ''

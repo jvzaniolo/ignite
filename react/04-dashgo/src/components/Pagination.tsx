@@ -11,6 +11,9 @@ import {
   Tooltip,
 } from '@chakra-ui/react'
 
+import queryClient from '../services/queryClient'
+import { getUsers } from '../services/hooks/useUserQuery'
+
 interface PaginationProps {
   page: number
   total: number
@@ -39,6 +42,12 @@ export default function Pagination({
     page >= 1
       ? generatePagesArray(page, Math.min(page + siblingsCount, lastPage))
       : []
+
+  async function handlePrefetchPage(page: number) {
+    await queryClient.prefetchQuery(['users', page], () => getUsers(page), {
+      staleTime: 1000 * 60 * 10,
+    })
+  }
 
   return (
     <Stack
@@ -111,6 +120,7 @@ export default function Pagination({
                 variant="outline"
                 colorScheme="gray"
                 onClick={() => onPageChange(nextPage)}
+                onMouseEnter={() => handlePrefetchPage(nextPage)}
               >
                 {nextPage}
               </Button>
