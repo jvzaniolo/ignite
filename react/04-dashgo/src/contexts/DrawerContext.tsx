@@ -1,5 +1,5 @@
+import React, { createContext, ReactNode, useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { createContext, ReactNode, useContext, useEffect } from 'react'
 import { useDisclosure, UseDisclosureProps } from '@chakra-ui/react'
 
 interface DrawerProviderProps {

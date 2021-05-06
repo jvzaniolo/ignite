@@ -1,4 +1,5 @@
 import React from 'react'
+import { RiMenuLine } from 'react-icons/ri'
 import {
   Flex,
   Icon,
@@ -11,7 +12,6 @@ import Search from './Search'
 import Profile from './Profile'
 import Notification from './Notification'
 import { useDrawer } from '../../contexts/DrawerContext'
-import { RiMenuLine } from 'react-icons/ri'
 
 export default function Header() {
   const { onOpen } = useDrawer()

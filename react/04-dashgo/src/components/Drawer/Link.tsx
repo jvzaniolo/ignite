@@ -1,4 +1,3 @@
-import ActiveLink from '../ActiveLink'
 import React, { ElementType } from 'react'
 import {
   Text,
@@ -6,6 +5,8 @@ import {
   Link as ChakraLink,
   LinkProps as ChakraLinkProps,
 } from '@chakra-ui/react'
+
+import ActiveLink from '../ActiveLink'
 
 interface LinkProps extends ChakraLinkProps {
   href: string

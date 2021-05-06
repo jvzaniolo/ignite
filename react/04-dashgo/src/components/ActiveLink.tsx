@@ -1,4 +1,4 @@
-import React, { cloneElement, ReactElement } from 'react'
+import React, { cloneElement, ReactElement, useState } from 'react'
 import Link, { LinkProps } from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -6,16 +6,16 @@ interface ActiveLinkProps extends LinkProps {
   children: ReactElement
 }
 
-export default function ActiveLink({ children, ...props }: ActiveLinkProps) {
-  let isActive = false
+const ActiveLink = ({ children, ...props }: ActiveLinkProps) => {
   const { asPath } = useRouter()
+  const [isActive, setIsActive] = useState(false)
 
   if (
     asPath === props.as ||
     asPath.includes === props.href ||
     asPath.includes(String(props.href))
   ) {
-    isActive = true
+    setIsActive(true)
   }
 
   return (
@@ -26,3 +26,5 @@ export default function ActiveLink({ children, ...props }: ActiveLinkProps) {
     </Link>
   )
 }
+
+export default ActiveLink
