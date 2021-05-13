@@ -1,20 +1,20 @@
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps } from 'next'
 
-import Head from 'next/head';
-import { RichText } from 'prismic-dom';
-import { getSession } from 'next-auth/client';
+import Head from 'next/head'
+import { RichText } from 'prismic-dom'
+import { getSession } from 'next-auth/client'
 
-import { getPrismicClient } from '../../services/prismic';
+import { getPrismicClient } from '../../services/prismic'
 
-import styles from '../../styles/Post.module.scss';
+import styles from '../../styles/Post.module.scss'
 
 interface PostProps {
   post: {
-    slug: string;
-    title: string;
-    content: string;
-    updatedAt: string;
-  };
+    slug: string
+    title: string
+    content: string
+    updatedAt: string
+  }
 }
 
 export default function Post({ post }: PostProps) {
@@ -35,15 +35,15 @@ export default function Post({ post }: PostProps) {
         </article>
       </main>
     </>
-  );
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
   params,
 }) => {
-  const { slug } = params;
-  const session = await getSession({ req });
+  const { slug } = params
+  const session = await getSession({ req })
 
   if (!session?.activeSubscription) {
     return {
@@ -51,11 +51,11 @@ export const getServerSideProps: GetServerSideProps = async ({
         destination: '/',
         permanent: false,
       },
-    };
+    }
   }
 
-  const prismic = getPrismicClient(req);
-  const response = await prismic.getByUID('post', String(slug), {});
+  const prismic = getPrismicClient(req)
+  const response = await prismic.getByUID('post', String(slug), {})
 
   const post = {
     slug,
@@ -69,11 +69,11 @@ export const getServerSideProps: GetServerSideProps = async ({
         year: 'numeric',
       }
     ),
-  };
+  }
 
   return {
     props: {
       post,
     },
-  };
-};
+  }
+}

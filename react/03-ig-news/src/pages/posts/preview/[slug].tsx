@@ -1,34 +1,34 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head'
+import Link from 'next/link'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { GetStaticPaths, GetStaticProps } from 'next'
 
-import { RichText } from 'prismic-dom';
-import { useSession } from 'next-auth/client';
+import { RichText } from 'prismic-dom'
+import { useSession } from 'next-auth/client'
 
-import { getPrismicClient } from '../../../services/prismic';
+import { getPrismicClient } from '../../../services/prismic'
 
-import styles from '../../../styles/Post.module.scss';
+import styles from '../../../styles/Post.module.scss'
 
 interface PostPreviewProps {
   post: {
-    slug: string;
-    title: string;
-    content: string;
-    updatedAt: string;
-  };
+    slug: string
+    title: string
+    content: string
+    updatedAt: string
+  }
 }
 
 export default function PostPreview({ post }: PostPreviewProps) {
-  const [session] = useSession();
-  const router = useRouter();
+  const [session] = useSession()
+  const router = useRouter()
 
   useEffect(() => {
     if (session?.activeSubscription) {
-      router.push(`/posts/${post.slug}`);
+      router.push(`/posts/${post.slug}`)
     }
-  }, [session]);
+  }, [session])
 
   return (
     <>
@@ -53,21 +53,22 @@ export default function PostPreview({ post }: PostPreviewProps) {
         </article>
       </main>
     </>
-  );
+  )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
     fallback: 'blocking',
-  };
-};
+  }
+}
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { slug } = params;
+  const SECONDS_IN_A_DAY = 60 * 60 * 24
+  const { slug } = params
 
-  const prismic = getPrismicClient();
-  const response = await prismic.getByUID('post', String(slug), {});
+  const prismic = getPrismicClient()
+  const response = await prismic.getByUID('post', String(slug), {})
 
   const post = {
     slug,
@@ -81,14 +82,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         year: 'numeric',
       }
     ),
-  };
-
-  const SECONDS_IN_A_DAY = 60 * 60 * 24;
+  }
 
   return {
     props: {
       post,
     },
     revalidate: SECONDS_IN_A_DAY,
-  };
-};
+  }
+}

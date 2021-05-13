@@ -23,11 +23,14 @@ import {
 import Header from '../../components/Header'
 import Drawer from '../../components/Drawer'
 import Pagination from '../../components/Pagination'
-import useUserQuery from '../../services/hooks/useUserQuery'
+import useUserQuery, { getUsers } from '../../services/hooks/useUserQuery'
+import { GetServerSideProps } from 'next'
 
-export default function Users() {
+export default function Users({ users }) {
   const [page, setPage] = useState(1)
-  const { data, isLoading, isFetching, error } = useUserQuery(page)
+  const { data, isLoading, isFetching, error } = useUserQuery(page, {
+    initialData: users
+  })
   const isLargeBreakpoint = useBreakpointValue({
     base: false,
     lg: true,
@@ -137,4 +140,14 @@ export default function Users() {
       </Flex>
     </Box>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const {users, total} = await getUsers(1)
+
+  return {
+    props: {
+      users,
+    }
+  }
 }

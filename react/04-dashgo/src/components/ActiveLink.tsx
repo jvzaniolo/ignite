@@ -7,15 +7,15 @@ interface ActiveLinkProps extends LinkProps {
 }
 
 const ActiveLink = ({ children, ...props }: ActiveLinkProps) => {
+  let isActive = false
   const { asPath } = useRouter()
-  const [isActive, setIsActive] = useState(false)
 
   if (
     asPath === props.as ||
     asPath.includes === props.href ||
     asPath.includes(String(props.href))
   ) {
-    setIsActive(true)
+    isActive = true
   }
 
   return (
