@@ -1,0 +1,16 @@
+.container {
+  height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container > * + * {
+  margin-top: 1rem;
+}
+
+.container > label > span {
+  display: block;
+}
