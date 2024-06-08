@@ -1,6 +1,6 @@
 import type { User } from "@prisma/client";
 import type { IUserRepository } from "~/repositories/UserRepository";
-import { UserNotFoundError } from "./_errors";
+import { ResourceNotFoundError } from "./_errors";
 
 interface GetUserProfileServiceRequest {
   userId: string;
@@ -19,7 +19,7 @@ export class GetUserProfileService {
     const user = await this.userRepository.findById(data.userId);
 
     if (!user) {
-      throw new UserNotFoundError("User not found");
+      throw new ResourceNotFoundError("User not found");
     }
 
     return { user };

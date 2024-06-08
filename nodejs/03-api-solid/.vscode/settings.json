@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["fastify", "tsup"],
+  "cSpell.words": ["dayjs", "fastify", "tsup"],
 
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
