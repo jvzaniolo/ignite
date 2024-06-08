@@ -1,6 +1,6 @@
 import { hash } from "bcryptjs";
 import { beforeEach, expect, suite, test } from "vitest";
-import { InMemoryUserRepository } from "~/repositories/memory/InMemoryRepository";
+import { InMemoryUserRepository } from "~/repositories/memory/InMemoryUserRepository";
 import { GetUserProfileService } from "./GetUserProfileService";
 import { UserNotFoundError } from "./_errors";
 

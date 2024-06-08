@@ -1,6 +1,6 @@
 import { hash } from "bcryptjs";
 import { beforeEach, expect, suite, test } from "vitest";
-import { InMemoryUserRepository } from "~/repositories/memory/InMemoryRepository";
+import { InMemoryUserRepository } from "~/repositories/memory/InMemoryUserRepository";
 import { AuthenticateService } from "./AuthenticateService";
 import { InvalidCredentialsError } from "./_errors";
 
