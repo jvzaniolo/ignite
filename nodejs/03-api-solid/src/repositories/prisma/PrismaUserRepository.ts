@@ -1,5 +1,5 @@
-import { db } from "@/lib/db";
 import { Prisma } from "@prisma/client";
+import { db } from "~/lib/db";
 import { IUserRepository } from "../UserRepository";
 
 export class PrismaUserRepository implements IUserRepository {
@@ -9,7 +9,6 @@ export class PrismaUserRepository implements IUserRepository {
   }
 
   async findByEmail(email: string) {
-    console.log("findByEmail", email);
     const user = await db.user.findUnique({ where: { email } });
     return user;
   }

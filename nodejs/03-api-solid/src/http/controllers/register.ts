@@ -1,10 +1,10 @@
-import { z } from "zod";
 import type { FastifyReply, FastifyRequest } from "fastify";
+import { z } from "zod";
+import { PrismaUserRepository } from "~/repositories/prisma/PrismaUserRepository";
 import {
   RegisterService,
   UserAlreadyExistsError,
-} from "@/services/RegisterService";
-import { PrismaUserRepository } from "@/repositories/prisma/PrismaUserRepository";
+} from "~/services/RegisterService";
 
 export async function register(req: FastifyRequest, res: FastifyReply) {
   let createUserSchema = z.object({
