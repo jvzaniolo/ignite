@@ -49,7 +49,7 @@ describe("Register Service", () => {
     });
 
     // Assert
-    expect(() =>
+    await expect(
       registerService.execute({
         name: "John Doe",
         email,
