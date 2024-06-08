@@ -1,5 +1,5 @@
-import { Prisma, User } from "@prisma/client";
-import { IUserRepository } from "../UserRepository";
+import { Prisma, type User } from "@prisma/client";
+import type { IUserRepository } from "../UserRepository";
 
 export class InMemoryUserRepository implements IUserRepository {
   private users: User[] = [];
