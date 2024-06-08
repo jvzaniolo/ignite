@@ -1,5 +1,6 @@
 import { hash } from "bcryptjs";
 import type { IUserRepository } from "~/repositories/UserRepository";
+import { UserAlreadyExistsError } from "./_errors";
 
 interface RegisterServiceRequest {
   name: string;
@@ -28,5 +29,3 @@ export class RegisterService {
     return { user };
   }
 }
-
-export class UserAlreadyExistsError extends Error {}
