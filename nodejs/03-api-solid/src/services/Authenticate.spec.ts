@@ -1,14 +1,19 @@
 import { hash } from "bcryptjs";
-import { expect, suite, test } from "vitest";
+import { beforeEach, expect, suite, test } from "vitest";
 import { InMemoryUserRepository } from "~/repositories/memory/InMemoryRepository";
 import { AuthenticateService } from "./Authenticate";
 import { InvalidCredentialsError } from "./_errors";
 
-suite("AuthenticateService", () => {
-  test("it should authenticate a user", async () => {
-    const userRepository = new InMemoryUserRepository();
-    const sut = new AuthenticateService(userRepository);
+let userRepository: InMemoryUserRepository;
+let sut: AuthenticateService;
 
+suite("AuthenticateService", () => {
+  beforeEach(() => {
+    userRepository = new InMemoryUserRepository();
+    sut = new AuthenticateService(userRepository);
+  });
+
+  test("it should authenticate a user", async () => {
     await userRepository.create({
       name: "Test",
       email: "test@test.com",
@@ -24,9 +29,6 @@ suite("AuthenticateService", () => {
   });
 
   test("should throw an error if the email is invalid", async () => {
-    const userRepository = new InMemoryUserRepository();
-    const sut = new AuthenticateService(userRepository);
-
     await userRepository.create({
       name: "Test",
       email: "test@test.com",
@@ -39,9 +41,6 @@ suite("AuthenticateService", () => {
   });
 
   test("should throw an error if the password is invalid", async () => {
-    const userRepository = new InMemoryUserRepository();
-    const sut = new AuthenticateService(userRepository);
-
     await userRepository.create({
       name: "Test",
       email: "test@test.com",

@@ -1,14 +1,21 @@
 import { compare } from "bcryptjs";
-import { expect, suite, test } from "vitest";
+import { beforeEach, expect, suite, test } from "vitest";
 import { InMemoryUserRepository } from "~/repositories/memory/InMemoryRepository";
 import { RegisterService } from "./RegisterService";
 import { UserAlreadyExistsError } from "./_errors";
 
-suite("Register Service", () => {
-  test("it should register a user", async () => {
-    const registerService = new RegisterService(new InMemoryUserRepository());
+let userRepository: InMemoryUserRepository;
+// Stands for "System Under Test", represents the code being tested
+let sut: RegisterService;
 
-    const { user } = await registerService.execute({
+suite("Register Service", () => {
+  beforeEach(() => {
+    userRepository = new InMemoryUserRepository();
+    sut = new RegisterService(userRepository);
+  });
+
+  test("it should register a user", async () => {
+    const { user } = await sut.execute({
       name: "John Doe",
       email: "john.doe@example.com",
       password: "password",
@@ -18,9 +25,7 @@ suite("Register Service", () => {
   });
 
   test("it should hash the user password", async () => {
-    const registerService = new RegisterService(new InMemoryUserRepository());
-
-    const { user } = await registerService.execute({
+    const { user } = await sut.execute({
       name: "John Doe",
       email: "john.doe@example.com",
       password: "password",
@@ -32,17 +37,16 @@ suite("Register Service", () => {
   });
 
   test("it should not create a user with the same email", async () => {
-    const registerService = new RegisterService(new InMemoryUserRepository());
     const email = "john.doe@example.com";
 
-    await registerService.execute({
+    await sut.execute({
       name: "John Doe",
       email,
       password: "password",
     });
 
     await expect(
-      registerService.execute({
+      sut.execute({
         name: "John Doe",
         email,
         password: "password",
