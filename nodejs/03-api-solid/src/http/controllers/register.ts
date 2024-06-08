@@ -8,7 +8,7 @@ export async function register(req: FastifyRequest, res: FastifyReply) {
   let createUserSchema = z.object({
     name: z.string(),
     email: z.string().email(),
-    password: z.string().min(8),
+    password: z.string().min(6),
   });
 
   let { name, email, password } = createUserSchema.parse(req.body);

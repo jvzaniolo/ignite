@@ -7,7 +7,7 @@ import { InvalidCredentialsError } from "~/services/_errors";
 export async function authenticate(req: FastifyRequest, res: FastifyReply) {
   let authenticateSchema = z.object({
     email: z.string().email(),
-    password: z.string().min(8),
+    password: z.string().min(6),
   });
 
   let { email, password } = authenticateSchema.parse(req.body);
